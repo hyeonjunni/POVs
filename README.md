@@ -18,7 +18,7 @@ POVs(내부 프로젝트명 Ambient Legacy)는 가족이 사진·영상·음성�
 |---|---|
 | 앱 | Expo SDK 54, React Native 0.81, React 19, react-native-web, AsyncStorage, expo-image-picker / expo-video / expo-audio |
 | 백엔드 | Python 3.12, FastAPI, SQLAlchemy 2, Alembic, Pydantic Settings, PyJWT, cryptography |
-| DB | PostgreSQL(운영 기준) 또는 SQLite(로컬·테스트). pgvector 경로는 코드에 있으나 이 스냅샷에서는 검증하지 않았습니다 |
+| DB | PostgreSQL 및 SQLite 지원. 아래 공개본 기동 검증은 SQLite 기준이며, pgvector 경로는 이 작업에서 검증하지 않았습니다 |
 | 저장소 | 로컬 파일 저장(기본). Google Cloud Storage 어댑터는 SECURE 모드의 암호문 저장과 과거 LEGACY 객체 읽기·삭제용으로만 남아 있습니다 |
 | AI(선택) | Ollama 호환 로컬 LLM(Gemma/EXAONE/Qwen 계열 모델 이름 설정), 로컬 OCR 실행 파일, 로컬 STT 실행 파일, 선택적 임베딩 엔드포인트 |
 
@@ -42,7 +42,7 @@ backend/
   tests/                pytest 테스트 (합성 픽스처만 사용)
 ```
 
-흐름: 앱은 백엔드 API만 호출합니다. 백엔드가 인증(JWT), 가족방 소속·기록 공개 범위 검사, 미디어 전달을 담당하고, 질문 답변은 접근 가능한 기록에서 검색한 근거로만 생성하며 근거가 없으면 답을 만들지 않도록 결정론 게이트를 거칩니다.
+흐름: 앱은 백엔드 API만 호출합니다. 백엔드가 인증(JWT), 가족방 소속·기록 공개 범위 검사, 미디어 전달을 담당하고, 질문 답변에는 접근 가능한 기록에서 검색한 근거와 원본 인용을 제공합니다. 질문 유형별 규칙 기반 경로와 LLM 생성 경로가 있으며, 게이트 적용 범위는 경로·설정에 따라 다릅니다. 근거 기반 생성이 모든 답변의 사실 정확성을 보장하지는 않습니다.
 
 ## 실행 방법
 
@@ -105,7 +105,7 @@ python scripts/selftest_gates.py
 - 가족방 생성·초대 코드 참여·삭제, 구성원 목록과 가족 관계 정보
 - 글·사진·영상·음성 기록 업로드와 조회, 기록별 공개 범위와 수명주기(보관·삭제 요청)
 - 가족방 단위 기록 검색(BM25 기반 색인)과 기록 근거를 인용하는 질문 답변 API
-- 근거 없는 답변·다른 가족방 정보 노출을 막는 결정론 게이트와 회귀 테스트
+- 인증·가족방 권한·PRIVATE 접근 검사, 질문 유형별 근거 검사와 회귀 테스트
 
 설정해야 동작하거나 기본으로 꺼져 있음:
 
@@ -129,6 +129,7 @@ python scripts/selftest_gates.py
 - 정리 전부터 있던 알려진 실패(원본에서도 똑같이 재현됨):
   - 앱 `chatKeyboardDraft.test.cjs` 2건: 테스트 환경에 `__DEV__` 전역이 정의되지 않음
   - `tests/test_m41_providers.py::test_pcm_only_scope_and_offline_provider_mapping`: 로컬 음성 인식 런타임이 없는 환경
+  - `tests/test_gcs_secure_runtime.py` 2건: 공개본과 원본에서 동일 실패
   - `scripts/check_gates.py`의 골든셋 일부 항목과 E2E 단계
 
 ## 포함하지 않은 것
