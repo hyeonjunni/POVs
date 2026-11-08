@@ -139,6 +139,8 @@ python scripts/selftest_gates.py
 - 자격 증명, 키 파일, 서명 키스토어, 실제 `.env`, DB 덤프, 로그
 - 운영·배포 환경 설정과 내부 문서, 개발 과정 기록
 
+시연용 미디어의 제작 도구와 공개 검토 상태는 [docs/DATA_PROVENANCE.md](docs/DATA_PROVENANCE.md)에 정리했습니다.
+
 실제로 질문 답변을 확인하려면 앱에서 직접 가족방을 만들고 기록을 올리거나, 본인이 권한을 가진 데이터를 준비해야 합니다.
 
 <!-- HUMANIZE-SUMMARY -->
