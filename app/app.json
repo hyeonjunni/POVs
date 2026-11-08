@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "POVs",
+    "icon": "./assets/branding/povs-icon.png",
+    "slug": "ambient-legacy-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "plugins": [
+      "expo-video",
+      "expo-web-browser"
+    ],
+    "android": {
+      "package": "com.example.povs",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/branding/povs-adaptive-foreground.png",
+        "backgroundColor": "#F7F9FC"
+      }
+    },
+    "web": {
+      "favicon": "./assets/branding/povs-favicon.png"
+    },
+    "scheme": "ambientlegacy"
+  }
+}

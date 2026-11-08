@@ -1,0 +1,29 @@
+{
+  "version": "retrieval_eval_v1",
+  "model_key": "synthetic-token-hash@v1",
+  "candidate_limit": 200,
+  "rooms": [
+    {
+      "id": "eval-room-ko",
+      "user_id": "eval-user-ko",
+      "records": [
+        {"id": "ko-sea", "title": "바다 산책", "text": "할머니와 제주 바다를 걸었던 여름 가족 여행의 추억"},
+        {"id": "ko-food", "title": "김치 레시피", "text": "가족이 함께 만든 김치와 저녁 식사 기록"}
+      ]
+    },
+    {
+      "id": "eval-room-en",
+      "user_id": "eval-user-en",
+      "records": [
+        {"id": "en-garden", "title": "Garden day", "text": "We planted tomatoes in the family garden on a sunny spring day"},
+        {"id": "en-music", "title": "Piano recital", "text": "A piano recital and family music rehearsal recording"}
+      ]
+    }
+  ],
+  "queries": [
+    {"id": "tune-ko-sea", "split": "tuning", "room_id": "eval-room-ko", "query": "제주 바다 가족 여행", "relevant_record_ids": ["ko-sea"]},
+    {"id": "eval-ko-food", "split": "evaluation", "room_id": "eval-room-ko", "query": "김치 저녁 식사", "relevant_record_ids": ["ko-food"]},
+    {"id": "eval-en-garden", "split": "evaluation", "room_id": "eval-room-en", "query": "family garden tomatoes", "relevant_record_ids": ["en-garden"]},
+    {"id": "eval-en-unjudged", "split": "evaluation", "room_id": "eval-room-en", "query": "unjudged phrase", "relevant_record_ids": []}
+  ]
+}

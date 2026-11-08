@@ -1,0 +1,10 @@
+﻿node_modules
+.expo
+.git
+__pycache__
+*.pyc
+*.pyo
+eas-inspect-preview
+eas-build-list.json
+eas-log-*.txt
+eas-archive-check

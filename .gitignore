@@ -1,0 +1,53 @@
+﻿# App
+app/node_modules/
+app/.expo/
+app/dist/
+app/.env
+app/.env*.local
+app/eas-inspect-preview/
+app/eas-build-list.json
+app/eas-log-*.txt
+app/eas-archive-check/
+
+# Backend
+backend/.env
+backend/.venv/
+backend/.uv-cache/
+backend/app/storage/uploads/
+backend/*.db
+
+# Secrets and local credentials (never commit)
+**/.env
+!**/.env.example
+*.keystore
+*.jks
+*.p12
+*.pem
+google-services.json
+GoogleService-Info.plist
+
+# Python
+.pytest_cache/
+**/__pycache__/
+*.pyc
+*.pyo
+
+# Android local build output
+app/android/.kotlin/
+app/android/.gradle/
+app/android/.gradle-user/
+app/android/app/build/
+app/android/build/
+app/android/gradle-build.log
+
+# Datasets, model weights and adapters are provided outside the repository
+/datasets/
+/models/
+*.gguf
+*.safetensors
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
